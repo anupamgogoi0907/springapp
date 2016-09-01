@@ -1,22 +1,32 @@
 package com.anupam.app.config;
 
-import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRegistration;
 
-public class ServletInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
+import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.DispatcherServlet;
 
-	@Override
-	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { SpringRootConfig.class };
-	}
+public class ServletInitializer implements WebApplicationInitializer {
 
-	@Override
-	protected Class<?>[] getServletConfigClasses() {
-		return new Class[]{SpringWebConfig.class};
-	}
+	public void onStartup(ServletContext container) throws ServletException {
+		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+		rootContext.register(SpringAppConfig.class);
 
-	@Override
-	protected String[] getServletMappings() {
-		return new String[] { "/" };
+		// Manage the life cycle of the root application context
+		container.addListener(new ContextLoaderListener(rootContext));
+
+		// Create the dispatcher servlet's Spring application context
+		AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
+		dispatcherServlet.register(SpringWebConfig.class);
+
+		// Register and map the dispatcher servlet.
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher",	new DispatcherServlet(dispatcherServlet));
+		dispatcher.setLoadOnStartup(1);
+		dispatcher.addMapping("/");
+		
 	}
 
 }
