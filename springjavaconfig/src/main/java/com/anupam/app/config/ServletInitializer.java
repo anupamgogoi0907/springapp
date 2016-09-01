@@ -12,21 +12,18 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class ServletInitializer implements WebApplicationInitializer {
 
 	public void onStartup(ServletContext container) throws ServletException {
-		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringAppConfig.class);
+		// Context
+		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+		ctx.register(SpringAppConfig.class, SpringMVCConfig.class);
 
 		// Manage the life cycle of the root application context
-		container.addListener(new ContextLoaderListener(rootContext));
-
-		// Create the dispatcher servlet's Spring application context
-		AnnotationConfigWebApplicationContext dispatcherServlet = new AnnotationConfigWebApplicationContext();
-		dispatcherServlet.register(SpringWebConfig.class);
+		container.addListener(new ContextLoaderListener(ctx));
 
 		// Register and map the dispatcher servlet.
-		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher",	new DispatcherServlet(dispatcherServlet));
+		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(ctx));
 		dispatcher.setLoadOnStartup(1);
-		dispatcher.addMapping("/");
-		
+		dispatcher.addMapping("/*");
+
 	}
 
 }
