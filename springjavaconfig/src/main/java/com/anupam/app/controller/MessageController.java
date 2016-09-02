@@ -7,11 +7,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class MessageController {
 
-	@MessageMapping("/help")
-	@SendTo("/topic/message")
-	public String getMessage() throws InterruptedException {
-		Thread.sleep(2000);
-		return "Help me";
-	}
-
+	@MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public String greeting(String message) throws Exception {
+        Thread.sleep(1000); // simulated delay
+        return "Hellooooo";
+    }
 }

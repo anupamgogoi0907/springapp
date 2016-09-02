@@ -12,11 +12,11 @@ public class SpringWebSocketConfig extends AbstractWebSocketMessageBrokerConfigu
 
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic");
-		config.setApplicationDestinationPrefixes("/msg");
+        config.setApplicationDestinationPrefixes("/app");
 	}
 
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/help").withSockJS();
+		 registry.addEndpoint("/gs-guide-websocket").withSockJS();
 
 	}
 
