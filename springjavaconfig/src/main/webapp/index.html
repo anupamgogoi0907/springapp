@@ -1,28 +1,53 @@
 <html lang="en">
+
 <head>
-<!-- Angular Material style sheet -->
-<link rel="stylesheet"
-	href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	<!-- Angular Material style sheet -->
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
 
-<!-- Angular Material requires Angular.js Libraries -->
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-aria/angular-aria.min.js"></script>
-<script src="bower_components/angular-messages/angular-messages.min.js"></script>
+	<!-- Angular Material requires Angular.js Libraries -->
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="bower_components/angular-aria/angular-aria.min.js"></script>
+	<script src="bower_components/angular-messages/angular-messages.min.js"></script>
 
-<!-- Angular Material Library -->
-<script src="bower_components/angular-material/angular-material.min.js"></script>
+	<!-- Angular Material Library -->
+	<script src="bower_components/angular-material/angular-material.min.js"></script>
 
-<!-- Web Socket -->
-<script src="bower_components/sockjs/sockjs.min.js"></script>
-<script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+	<!-- Web Socket -->
+	<script src="bower_components/sockjs/sockjs.min.js"></script>
+	<script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
 
-<!-- User Defined. -->
-<script src="app/scripts/app.js"></script>
+	<!-- User Defined. -->
+	<script src="app/scripts/app.js"></script>
 
 
 </head>
-<body ng-app="myapp" ng-controller="IndexController">
-	<h1>{{msg}}</h1>
+
+<body ng-app="stompapp" ng-controller="MyController">
+	<h1>STOMP Testing</h1>
+	<button ng-click="onClick()">Receive</button>
+
+	<!-- Script -->
+	<script type="text/javascript">
+		var app = angular.module('stompapp', [ ]);
+		app.controller('MyController', function($scope) {
+			$scope.onClick = function() {
+			var socket = new SockJS('/springjavaconfig/websocket');
+    		var stompClient = Stomp.over(socket);
+    		
+    		<!--
+    		stompClient.connect({}, function (frame) 
+			{
+      			console.log('Connected: ' + frame);
+		        stompClient.subscribe('/topic/greetings', function (greeting) 
+				{
+            			
+        		});
+    		});
+    		-->
+			};
+		});
+	</script>
 </body>
+
 </html>
