@@ -14,7 +14,7 @@ public class ServletInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext container) throws ServletException {
 		// Context
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(SpringAppConfig.class, SpringMVCConfig.class,MQConfig.class);
+		ctx.register(SpringAppConfig.class, SpringMVCConfig.class,SpringWebSocketConfig.class);
 
 		// Manage the life cycle of the root application context
 		container.addListener(new ContextLoaderListener(ctx));

@@ -14,8 +14,8 @@
 	<script src="bower_components/angular-material/angular-material.min.js"></script>
 
 	<!-- Web Socket -->
-	<script src="bower_components/sockjs/sockjs.min.js"></script>
-	<script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+	<script src="app/scripts/stomp.js"></script>
+	<script src="http://cdn.sockjs.org/sockjs-0.3.js"></script>	
 
 	<!-- User Defined. -->
 	<script src="app/scripts/app.js"></script>
@@ -26,28 +26,6 @@
 <body ng-app="stompapp" ng-controller="MyController">
 	<h1>STOMP Testing</h1>
 	<button ng-click="onClick()">Receive</button>
-
-	<!-- Script -->
-	<script type="text/javascript">
-		var app = angular.module('stompapp', [ ]);
-		app.controller('MyController', function($scope) {
-			$scope.onClick = function() {
-			var socket = new SockJS('/springjavaconfig/websocket');
-    		var stompClient = Stomp.over(socket);
-    		
-    		<!--
-    		stompClient.connect({}, function (frame) 
-			{
-      			console.log('Connected: ' + frame);
-		        stompClient.subscribe('/topic/greetings', function (greeting) 
-				{
-            			
-        		});
-    		});
-    		-->
-			};
-		});
-	</script>
 </body>
 
 </html>
