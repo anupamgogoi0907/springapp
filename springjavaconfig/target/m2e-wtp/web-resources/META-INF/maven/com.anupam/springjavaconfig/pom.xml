@@ -41,31 +41,7 @@
 			<version>4.3.2.RELEASE</version>
 		</dependency>
 
-		<!--Active MQ -->
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
-			<version>${mq.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-spring</artifactId>
-			<version>${mq.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-http</artifactId>
-			<version>${mq.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-stomp</artifactId>
-			<version>${mq.version}</version>
-		</dependency>
-
+		
 		<!-- JackSon -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
