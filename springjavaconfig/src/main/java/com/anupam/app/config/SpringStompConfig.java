@@ -1,8 +1,5 @@
 package com.anupam.app.config;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -14,7 +11,7 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class SpringWebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
+public class SpringStompConfig extends AbstractWebSocketMessageBrokerConfigurer {
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic");
@@ -23,52 +20,17 @@ public class SpringWebSocketConfig extends AbstractWebSocketMessageBrokerConfigu
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/chat").withSockJS();
+		registry.addEndpoint("/websocket").withSockJS();
 	}
 
 	@Controller
 	public class MyMessageController {
-		@MessageMapping("/chat")
-		@SendTo("/topic/messages")
-		public Greeting send(HelloMessage message) throws Exception {
-			String time = new SimpleDateFormat("HH:mm").format(new Date());
-			return new Greeting(time);
+		@MessageMapping("/hello")
+//		@SendTo("/topic/messages")
+		public String send(String message) throws Exception {
+			return "Hello "+message;
 		}
 	}
-	public class HelloMessage {
-
-	    private String name;
-
-	    public HelloMessage() {
-	    }
-
-	    public HelloMessage(String name) {
-	        this.name = name;
-	    }
-
-	    public String getName() {
-	        return name;
-	    }
-
-	    public void setName(String name) {
-	        this.name = name;
-	    }
-	}
-	public class Greeting {
-
-		private String content;
-
-		public Greeting() {
-		}
-
-		public Greeting(String content) {
-			this.content = content;
-		}
-
-		public String getContent() {
-			return content;
-		}
-
-	}
+	
 
 }

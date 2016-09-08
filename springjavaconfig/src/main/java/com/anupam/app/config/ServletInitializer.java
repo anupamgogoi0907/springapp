@@ -14,7 +14,7 @@ public class ServletInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext container) throws ServletException {
 		// Context
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(SpringAppConfig.class, SpringMVCConfig.class,SpringWebSocketConfig.class);
+		ctx.register(SpringAppConfig.class, SpringStompConfig.class);
 
 		// Manage the life cycle of the root application context
 		container.addListener(new ContextLoaderListener(ctx));
@@ -23,7 +23,7 @@ public class ServletInitializer implements WebApplicationInitializer {
 		ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(ctx));
 		dispatcher.setLoadOnStartup(1);
 		dispatcher.addMapping("/rest/*");
-		dispatcher.addMapping("/msg/*");
+		dispatcher.addMapping("/ws/*");
 	}
 
 }
