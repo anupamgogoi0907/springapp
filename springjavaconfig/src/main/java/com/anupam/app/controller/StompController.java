@@ -1,5 +1,7 @@
 package com.anupam.app.controller;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -11,6 +13,12 @@ public class StompController {
 
 	@Autowired
 	SimpMessagingTemplate template;
+	
+	@PostConstruct
+	public void init()
+	{
+		System.out.println("");
+	}
 
 	@MessageMapping("/ping")
 	@SendTo("/topic/ping")
