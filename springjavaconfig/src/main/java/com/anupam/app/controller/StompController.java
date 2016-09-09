@@ -13,10 +13,9 @@ public class StompController {
 
 	@Autowired
 	SimpMessagingTemplate template;
-	
+
 	@PostConstruct
-	public void init()
-	{
+	public void init() {
 		System.out.println("");
 	}
 
@@ -24,6 +23,6 @@ public class StompController {
 	@SendTo("/topic/ping")
 	public String ping(String message) throws Exception {
 		System.out.println(message);
-		return "Hello " + message;
+		return message;
 	}
 }

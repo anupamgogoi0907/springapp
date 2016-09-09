@@ -1,25 +1,31 @@
 var app = angular.module('stompapp', []);
-app.controller('MyController', function ($scope) {
+app.controller('MyController', function($scope) {
 	var client = null;
-	$scope.stompmsg = '';
 
+	$scope.info = {
+		msginput : "",
+		msgoutput : ""
+	};
+		
 	// Connect to Websocket.
 	connectStomp();
 
-
-    function connectStomp() {
-        var socket = new SockJS('/springjavaconfig/ws/websocket');
+	function connectStomp() {
+		var socket = new SockJS('/springjavaconfig/ws/websocket');
 		client = Stomp.over(socket);
-		client.connect({}, function (frame) {
+		client.connect({}, function(frame) {
 			console.log('Connected: ' + frame);
-			client.subscribe('/topic/ping', function (result) {
-				alert(result.body);
+			client.subscribe('/topic/ping', function(result) {
+				var data = result.body;
+				
+				$scope.info.msgoutput = data;
+				$scope.$apply();
 			});
 		});
-    };
-	$scope.onStomp = function () {
-		client.send('/app/ping', {}, $scope.stompmsg);
+	}
+	;
+	$scope.onStomp = function() {
+		client.send('/app/ping', {}, $scope.info.msginput);
 	};
-
 
 });
