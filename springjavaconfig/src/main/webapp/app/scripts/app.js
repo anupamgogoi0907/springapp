@@ -15,6 +15,8 @@ app.controller('MyController', function($scope) {
 		client = Stomp.over(socket);
 		client.connect({}, function(frame) {
 			console.log('Connected: ' + frame);
+			
+			// Subscribe to messages published on this destination.
 			client.subscribe('/topic/ping', function(result) {
 				var data = result.body;
 				
@@ -24,6 +26,8 @@ app.controller('MyController', function($scope) {
 		});
 	}
 	;
+	
+	// Send a message.
 	$scope.onStomp = function() {
 		client.send('/app/ping', {}, $scope.info.msginput);
 	};
