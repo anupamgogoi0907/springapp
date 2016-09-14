@@ -29,7 +29,7 @@ public class Client {
 		@Override
 		public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
 			System.out.println("Message sent.");
-			session.send("/app/ping", "Hello world. I am coming from Java client.");
+			session.send("/app/ping", "Hello Browser. I am Java.");
 		}
 	}
 }
