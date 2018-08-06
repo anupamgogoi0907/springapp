@@ -10,9 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class UserRepositoryImpl implements UserRepository {
@@ -30,11 +28,11 @@ public class UserRepositoryImpl implements UserRepository {
                     "from TB_TWEET " +
                     "order by FOLLOWERS_COUNT desc";
             logger.debug("Executing: " + sql);
-            List<Object[]> list=jdbcTemplate.query(sql, new RowMapper<Object[]>() {
+            List<Object[]> list = jdbcTemplate.query(sql, new RowMapper<Object[]>() {
                 @Override
                 public Object[] mapRow(ResultSet rs, int i) throws SQLException {
                     Object[] objects = new Object[3];
-                    objects[0] =rs.getString("USER_NAME");
+                    objects[0] = rs.getString("USER_NAME");
                     objects[1] = rs.getInt("FOLLOWERS_COUNT");
                     return objects;
                 }
