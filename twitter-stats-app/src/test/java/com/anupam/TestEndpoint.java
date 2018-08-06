@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = App.class)
 @AutoConfigureMockMvc
-public class TestApp {
+public class TestEndpoint {
 
 
     @Autowired

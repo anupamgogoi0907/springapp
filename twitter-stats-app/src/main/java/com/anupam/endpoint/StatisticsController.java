@@ -18,9 +18,20 @@ import java.util.Map;
 public class StatisticsController {
 
     private static Logger logger = LogManager.getLogger(StatisticsController.class);
-    @Autowired
+
+
     UserService userService;
 
+    @Autowired
+    public StatisticsController(UserService userService) {
+        this.userService = userService;
+    }
+
+    /**
+     * Get top 5 users with highest followers.
+     *
+     * @return
+     */
     @GetMapping("/users")
     public AppResponse getUsers() {
         try {
@@ -35,6 +46,11 @@ public class StatisticsController {
 
     }
 
+    /**
+     * Get posts count by every hour of the day.
+     *
+     * @return
+     */
     @GetMapping("/hour")
     public AppResponse getPostsByHour() {
         try {
@@ -47,6 +63,11 @@ public class StatisticsController {
         }
     }
 
+    /**
+     * Get posts count by tag
+     *
+     * @return
+     */
     @GetMapping("/tag")
     public AppResponse getPostsByTagAndLang() {
         try {

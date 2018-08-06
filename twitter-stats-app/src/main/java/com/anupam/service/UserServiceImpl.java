@@ -15,8 +15,12 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     private static Logger logger = LogManager.getLogger(UserServiceImpl.class);
+    private UserRepository userRepository;
+
     @Autowired
-    UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<Map<String, Object>> getUsersWithHighestFollowers() throws Exception {

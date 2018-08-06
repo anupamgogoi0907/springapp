@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 public class DBConfiguration {
 
     /**
-     * Initialize H2 database from sample data.
+     * Initialize in-memory H2 database from sample data.
      *
      * @return
      */
